@@ -152,6 +152,7 @@
     }
   }
   &__elem {
+    height: fit-content;
     color: $text-color;
     background: $base-color;
     border-radius: 5px;

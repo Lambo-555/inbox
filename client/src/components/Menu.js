@@ -19,7 +19,7 @@ const Menu = (props) => {
     if (props) {
       setUsersOnline(props.onlineUsers);
     }
-  });
+  }, [props]);
 
   // create and buffer invite link
   const copyHandler = () => {
