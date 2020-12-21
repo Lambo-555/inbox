@@ -1,0 +1,77 @@
+@import "index.module";
+
+.back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: $base-color; // color
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.head {
+  font-size: 4rem;
+  padding: 0;
+  margin: 0;
+}
+
+.subhead {
+  font-size: 1.5rem;
+  padding: 0 5px;
+  margin: 0 0 20px 0;
+  background: linear-gradient(110deg,
+          rgba($text-color, 0.0) 25%,
+          rgba($text-color, 0.5) 30%,
+          rgba($text-color, 0.0) 31%
+  );
+  background-size: 400% 400%;
+  animation: gradient 4s linear infinite;
+  border-radius: 2px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+  background: $text-color; // color
+  &__input {
+    font-size: 1.5rem;
+    text-align: center;
+    max-width: 200px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 2px;
+  }
+
+  &__button {
+    padding: 10px 0;
+    background-color: $base-color; //color
+    text-transform: uppercase;
+    font-weight: bolder;
+    border: none;
+    transition: opacity ease .75s, box-shadow ease .45s;
+    border-radius: 2px;
+    &:hover {
+      box-shadow: 0 10px 35px $base-color; // color
+    }
+  }
+
+  &__error {
+    text-align: center;
+    color: $base-color; // color
+  }
+}
