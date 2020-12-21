@@ -15,8 +15,8 @@ import HocModal from "./HocModal";
 import Menu from "./Menu";
 // import Video from "./Video";
 
-// socket init
-const socket = io.connect(`http://localhost:${config.SERVER_PORT}`);
+// socket init http://localhost for dev
+const socket = io.connect(`${config.SITE_NAME}:${config.SERVER_PORT}`);
 
 //_____________________________
 //_______ COMPONENT ___________
@@ -137,8 +137,8 @@ const RoomPage = () => {
 
               <button
                   onClick={() => {
+                    setModalName(<Menu onlineUsers={usersList}/>);
                     showModalHandler();
-                    setModalName(<Menu onlineUsers={usersList}/>)
                   }}
                   className={
                     [styles.box__button, styles.box__button_small]
@@ -156,7 +156,6 @@ const RoomPage = () => {
               {/*.join(' ')*/}
               {/*}>🎥*/}
               {/*</button>*/}
-
               {/*modal window*/}
               <HocModal
                   component={modalName}

@@ -1,9 +1,11 @@
 //_____ VARIABLES _____
 $base-color: yellow;
 $text-color: black;
-$main-fontFamily: 'Roboto Slab', cursive;
+$main-fontFamily: 'Roboto Slab', 'Roboto', 'Arial', cursive;
 
 //_____ NORMALIZE CSS _____
+
+
 html {
   font-family: $main-fontFamily;
   line-height: 1.15; /* 1 */

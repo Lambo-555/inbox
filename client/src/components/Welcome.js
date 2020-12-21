@@ -32,8 +32,6 @@ const Welcome = () => {
         if (name.length === 0) setErrorMsg('name is too short');
         if (name.length > 15) setErrorMsg('name is too long');
       }
-      // user already enter some text
-      setTouched(true);
     } else {
       // if all is ok we let user join new room
       setDisabled(false);
@@ -71,11 +69,15 @@ const Welcome = () => {
               className={styles.form__input}
               type="text"
               value={name}
-              onChange={(e) => setName(stringProtection(e.target.value))}
+              onChange={(e) => {
+                console.log('eee');
+                if(!touched) setTouched(true);
+                setName(stringProtection(e.target.value));
+              }}
           />
           {errorMsg
               ? <p className={styles.form__error}>{errorMsg}</p>
-              : <p className={styles.form__error}>{touched ? "is good name" : "enter your name"}</p>
+              : <p className={styles.form__error}>{touched ? "it is a good name" : "enter your name"}</p>
           }
           <button
               style={{opacity: disabled ? 0.4 : 1}}

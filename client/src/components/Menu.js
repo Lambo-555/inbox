@@ -12,15 +12,14 @@ const Menu = (props) => {
   const linkText = useRef();
   const history = useHistory();
   const currentPath = history.location.pathname.replace(/\/room\//, '');
-  const inviteLink = `${config.SITE_NAME}${currentPath}`;
+  const inviteLink = `${config.SITE_NAME}/${currentPath}`;
 
   useEffect(() => {
     // get list of online users in the room
     if (props) {
       setUsersOnline(props.onlineUsers);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onlineUsers]);
+  });
 
   // create and buffer invite link
   const copyHandler = () => {
@@ -53,7 +52,7 @@ const Menu = (props) => {
         <Link className={styles.box__button} to="/">leave room</Link>
         <p>Users in room :</p>
         <div className={styles.box__list}>
-          {usersOnline.length > 0
+          {usersOnline
               ? usersOnline.map((user, index) =>
                   (<li
                       className={styles.box__elem}

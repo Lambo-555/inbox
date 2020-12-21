@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 50;
 }
 
 .modal {
@@ -33,6 +34,7 @@
 
 .page {
   height: 100%;
+  max-height: calc(100% - 10px);
   display: flex;
   width: calc(100% - 10px);
   max-width: 500px;
@@ -57,6 +59,14 @@
   overflow-x: hidden;
   padding: 10px;
   scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: $text-color;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $base-color;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+  }
   &__message {
     padding: 7px 0;
     display: flex;
@@ -123,6 +133,7 @@
   align-items: center;
   justify-content: space-between;
   &__list {
+    height: 150px;
     background: $text-color;
     overflow-y: scroll;
     display: flex;
@@ -131,6 +142,14 @@
     flex-wrap: wrap;
     margin: 2px;
     border-radius: 2px;
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: $text-color;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $base-color;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+    }
   }
   &__elem {
     color: $text-color;
@@ -170,5 +189,6 @@
   &__subhead{
     margin: 0;
     padding: 10px;
+    overflow-x: auto;
   }
 }
