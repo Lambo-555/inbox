@@ -27,7 +27,7 @@ Task: Develop a simple JavaScript application – text chat room.
 `$ npm run start` 
 * Open http://localhost:3000/
 
-
+### Fast access dev git-commands
 - git remote add origin https://github.com/Lambo-555/inbox.git
 - git branch -M main
 - git push -u origin main
