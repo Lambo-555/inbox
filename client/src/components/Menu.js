@@ -12,7 +12,7 @@ const Menu = (props) => {
   const linkText = useRef();
   const history = useHistory();
   const currentPath = history.location.pathname.replace(/\/room\//, '');
-  const inviteLink = `${config.SITE_NAME}/${currentPath}`;
+  const inviteLink = `${config.SITE_NAME}:${config.CLIENT_PORT}/${currentPath}`;
 
   useEffect(() => {
     // get list of online users in the room

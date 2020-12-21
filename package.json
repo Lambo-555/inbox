@@ -9,7 +9,6 @@
     "server": "node server.js",
     "start": "concurrently \"npm run client\" \"npm run server\""
   },
-  "proxy": "https://inboxchat.herokuapp.com/",
   "keywords": [
     "fora soft",
     "react.js",
