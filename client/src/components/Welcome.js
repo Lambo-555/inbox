@@ -2,6 +2,8 @@ import {useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import stringProtection from "../utils/stringProtection";
 import styles from "./welcome.module.scss"; // custom styles for UI
+// add Sound Effects
+import soundFX from '../utils/sound';
 
 //_____________________________
 //_______ COMPONENT ___________
@@ -15,30 +17,46 @@ const Welcome = () => {
   const params = useParams();
 
   useEffect(() => {
-    if (params.room) {
-      setIsInvited(true)
-    } else {
-      setIsInvited(false)
+    let isMounted = true;
+    if (isMounted) {
+      if (params.room) {
+        setIsInvited(true)
+      } else {
+        setIsInvited(false)
+      }
+    }
+    return () => {
+      isMounted = false;
     }
   }, [params]);
 
   useEffect(() => {
-    // checking user name
-    if (name.length === 0 || name.length > 15) {
-      setDisabled(true);
-      // we do not show error on start
-      if (touched) {
-        // uniq errors handlers
-        if (name.length === 0) setErrorMsg('name is too short');
-        if (name.length > 15) setErrorMsg('name is too long');
+    //create cycle for update control
+    let isMounted = true;
+    if (isMounted) {
+      // checking user name
+      if (name.length === 0 || name.length > 15) {
+        setDisabled(true);
+
+        // we do not show error on start
+        if (touched) {
+          // uniq errors handlers
+          if (name.length === 0) setErrorMsg('name is too short');
+          if (name.length > 15) setErrorMsg('name is too long');
+        }
+      } else {
+
+        // if all is ok we let user join new room
+        setDisabled(false);
+        setErrorMsg('');
       }
-    } else {
-      // if all is ok we let user join new room
-      setDisabled(false);
-      setErrorMsg('');
+
+      // we store `name` in local storage
+      localStorage.setItem('name', name);
     }
-    // we store `name` in local storage
-    localStorage.setItem('name', name);
+    return () => {
+      isMounted = false;
+    }
   }, [name, touched]);
 
   const enterHandler = (e) => {
@@ -48,6 +66,8 @@ const Welcome = () => {
         ? `/room/${params.room}`
         : `/room/${getRoomName()}`;
     history.push(path);
+    //sound effect
+    soundFX('action');
   };
 
   const getRoomName = () => {
@@ -70,8 +90,7 @@ const Welcome = () => {
               type="text"
               value={name}
               onChange={(e) => {
-                console.log('eee');
-                if(!touched) setTouched(true);
+                if (!touched) setTouched(true);
                 setName(stringProtection(e.target.value));
               }}
           />

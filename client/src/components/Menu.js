@@ -2,10 +2,13 @@ import styles from "./roomPage.module.scss"
 import React, {useRef, useState, useEffect} from "react";
 import {Link, useHistory} from 'react-router-dom'
 import config from '../config/config'
+// add Sound Effects
+import soundFX from '../utils/sound';
 
 const Menu = (props) => {
   // set button "invite link" inner text
   const [touched, setTouched] = useState(false);
+  const [sound, setSound] = useState(true);
   const [usersOnline, setUsersOnline] = useState([]);
   const [copyStatus, setCopyStatus] = useState(false);
   // link elements creation
@@ -28,14 +31,19 @@ const Menu = (props) => {
       try {
         const text = linkText.current.textContent;
         const successful = navigator.clipboard.writeText(text);
-        const message = successful ? 'success copy' : 'you cant copy';
-        setCopyStatus(message)
+        const message = successful ? 'successfully copied' : `can't copy`;
+        setCopyStatus(message);
+        setTimeout(() => {
+          setCopyStatus('copy invite link');
+        }, 1500);
       } catch (e) {
         console.log('Provide rights to copy the text', e)
       }
     } else {
       setCopyStatus('room problem')
     }
+    //sound effect
+    soundFX('action');
   };
 
   return (
@@ -49,7 +57,20 @@ const Menu = (props) => {
             ref={linkText}
             className={styles.box__small}
         >{inviteLink}</small>
-        <Link className={styles.box__button} to="/">leave room</Link>
+        <Link className={styles.box__button} to="/" onClick={() => {
+          //sound effect
+          soundFX('action');
+        }}>leave room</Link>
+        <button
+            onClick={() => {
+              localStorage.setItem('mute', sound ? 'mute' : 'unmute');
+              setSound(!sound);
+            }}
+            className={
+              [styles.box__button_small, styles.box__button].join(' ')
+            }
+        >{sound ? '🔈 mute' : '🔊 unmute'}
+        </button>
         <p>Users in room :</p>
         <div className={styles.box__list}>
           {usersOnline

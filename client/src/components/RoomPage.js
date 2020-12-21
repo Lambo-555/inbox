@@ -13,10 +13,14 @@ import Message from "./Message";
 import stringProtection from "../utils/stringProtection";
 import HocModal from "./HocModal";
 import Menu from "./Menu";
+// add Sound Effects
+import soundFX from '../utils/sound';
 // import Video from "./Video";
 
 // socket init http://localhost for dev
 const socket = io.connect(`${config.SITE_NAME}:${config.SERVER_PORT}`);
+
+
 
 //_____________________________
 //_______ COMPONENT ___________
@@ -86,6 +90,8 @@ const RoomPage = () => {
   const onMessageSubmit = e => {
     // sending user messages from client
     e.preventDefault();
+    // Sound effect
+    soundFX('message');
     if (cliMsg.length === 0) return;
     socket.emit('chatMessage', {name: cliName, message: cliMsg});
     // clear form after sending messages
@@ -109,6 +115,7 @@ const RoomPage = () => {
 
   // modal windows handlers
   const hideModalHandler = (windowName) => {
+    soundFX('action');
     setShowModal(false);
   };
   const showModalHandler = (windowName) => {
